@@ -10,6 +10,7 @@ body {
 
 @theme {
   --color-onyx: #3c3c3c; 
+  --color-green: #74C042; 
 }
 
 @theme inline {
