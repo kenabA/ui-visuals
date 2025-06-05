@@ -20,68 +20,77 @@ export default function Hero() {
 
   useGSAP(
     () => {
-      gsap.from(".logo-container", {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        delay: 0.2,
+      const tl = gsap.timeline({
+        defaults: { duration: 1.5, ease: "power2.out" },
       });
-      gsap.to(".logo-container", {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        delay: 0.2,
-      });
-      gsap.from(".subtitle", {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        delay: 0.6,
-      });
-      gsap.to(".subtitle", {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        delay: 0.6,
-      });
-      gsap.from("[data-animate='line-left']", {
-        x: -100,
-        opacity: 0,
-        duration: 1,
-        delay: 0.4,
-      });
-      gsap.to("[data-animate='line-left']", {
-        x: 0,
-        opacity: 1,
-        duration: 1,
-        delay: 0.4,
-      });
-      gsap.from("[data-animate='line-right']", {
-        x: 100,
-        opacity: 0,
-        duration: 1,
-        delay: 0.4,
-      });
-      gsap.to("[data-animate='line-right']", {
-        x: 0,
-        opacity: 1,
-        duration: 1,
-        delay: 0.4,
-      });
-      gsap.from(".arr", { y: 100, opacity: 0 });
-      gsap.to(".arr", { y: 0, opacity: 1 });
-      gsap.from(".arr", {
-        y: -10,
-        repeat: -1,
-        repeatDelay: 0.1,
-        yoyo: true,
-      });
-      gsap.from(".arr", {
-        y: 0,
-        repeat: -1,
-        repeatDelay: 0.1,
-        yoyo: true,
-      });
+
+      tl.fromTo(
+        ".logo-container",
+        {
+          y: 100,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          delay: 0.2,
+        },
+        0.2,
+      )
+
+        .fromTo(
+          "[data-animate='line-left']",
+          {
+            x: -100,
+            opacity: 0,
+          },
+          {
+            x: 0,
+            opacity: 1,
+          },
+          0.4,
+        )
+        .fromTo(
+          "[data-animate='line-right']",
+          {
+            x: 100,
+            opacity: 0,
+          },
+          {
+            x: 0,
+            opacity: 1,
+          },
+          0.4,
+        )
+        .fromTo(
+          ".subtitle",
+          {
+            y: 100,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+          },
+          0.6,
+        )
+        .fromTo(".arr", { opacity: 0 }, { opacity: 1 }, 1)
+
+        .fromTo(
+          ".arr",
+          {
+            y: -5,
+          },
+          {
+            y: 0,
+            repeat: -1,
+            yoyo: true,
+            repeatDelay: 0.1,
+            ease: "circ.in",
+            duration: 0.6,
+          },
+          1.3,
+        );
     },
     { scope: container },
   );
@@ -89,43 +98,53 @@ export default function Hero() {
   useGSAP(
     () => {
       if (arrowClicked) {
-        gsap.from("[data-animate='line-left']", {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          delay: 0.4,
-        });
-        gsap.to("[data-animate='line-left']", {
-          x: -100,
-          opacity: 0,
-          duration: 1,
-          delay: 0.4,
-        });
+        gsap.fromTo(
+          "[data-animate='line-left']",
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            delay: 0.4,
+          },
+          {
+            x: -100,
+            opacity: 0,
+            duration: 1,
+            delay: 0.4,
+          },
+        );
 
-        gsap.from("[data-animate='line-right']", {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          delay: 0.4,
-        });
-        gsap.to("[data-animate='line-right']", {
-          x: 100,
-          opacity: 0,
-          duration: 1,
-          delay: 0.4,
-        });
-        gsap.from(".subtitle", {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          delay: 0.6,
-        });
-        gsap.to(".subtitle", {
-          y: 100,
-          opacity: 0,
-          duration: 1,
-          delay: 0.6,
-        });
+        gsap.fromTo(
+          "[data-animate='line-right']",
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            delay: 0.4,
+          },
+          {
+            x: 100,
+            opacity: 0,
+            duration: 1,
+            delay: 0.4,
+          },
+        );
+
+        gsap.fromTo(
+          ".subtitle",
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            delay: 0.6,
+          },
+          {
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            delay: 0.6,
+          },
+        );
       }
     },
     { dependencies: [arrowClicked] },
@@ -176,7 +195,7 @@ export default function Hero() {
     >
       <figure className="size-full scale-[1.05] opacity-50">
         <img
-          className="size-full flair"
+          className="size-full object-cover flair"
           src={abstract}
           alt="Background abstract "
         />
